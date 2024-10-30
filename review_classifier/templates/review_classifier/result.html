@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sentiment Analysis Result</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Sentiment Analysis Result</h1>
+    <div class="alert alert-info text-center mt-4">
+        <p><strong>Naive Bayes Prediction:</strong> {{ naive_bayes_prediction }}</p>
+        <p><strong>Logistic Regression Prediction:</strong> {{ logistic_regression_prediction }}</p>
+    </div>
+    <div class="text-center mt-3">
+        <a href="{% url 'home' %}" class="btn btn-secondary">Analyze Another Review</a>
+    </div>
+</div>
+</body>
+</html>

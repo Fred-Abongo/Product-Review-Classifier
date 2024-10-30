@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Product Review Sentiment Analysis</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Product Review Sentiment Analysis</h1>
+    <form action="{% url 'predict_sentiment' %}" method="post" class="mt-4">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="review_text">Enter Your Review:</label>
+            <textarea class="form-control" id="review_text" name="review_text" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Analyze Sentiment</button>
+    </form>
+</div>
+</body>
+</html>
