@@ -28,6 +28,14 @@ def home(request):
 def index(request):
     return render(request, 'home.html')
 
+def predict_sentiment(request):
+    if request.method == 'POST':
+        review_text = json.loads(request.body).get('review_text')
+        # Perform sentiment analysis on `review_text`
+        # Example sentiment response:
+        sentiment_result = "Positive"  # or fetch actual result from model
+        return JsonResponse({'sentiment': sentiment_result})
+
 @csrf_exempt
 def predict_sentiment(request):
     """

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Product Review Sentiment Analysis</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Product Review Sentiment Analysis</h1>
+    
+    <!-- Form for entering review text -->
+    <form id="reviewForm" class="mt-4">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="review_text">Enter Your Review:</label>
+            <textarea class="form-control" id="review_text" name="review_text" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Analyze Sentiment</button>
+    </form>
+    
+    <!-- Placeholder for displaying sentiment result -->
+    <div class="mt-4">
+        <h2>Sentiment Result:</h2>
+        <div id="result" class="alert alert-info" role="alert">Your result will appear here</div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+        e.preventDefault();  // Prevent default form submission
+
+        // Get the review text from textarea
+        const reviewText = document.getElementById('review_text').value;
+
+        // Send an asynchronous POST request to the backend
+        fetch("{% url 'predict_sentiment' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ review_text: reviewText })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Display the sentiment result
+            document.getElementById('result').innerText = `Sentiment: ${data.sentiment}`;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('result').innerText = 'An error occurred while analyzing the sentiment.';
+        });
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
