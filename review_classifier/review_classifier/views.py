@@ -17,7 +17,7 @@ def preprocess_text(text):
     """
     Preprocesses the input text: lowercasing, stripping, etc.
     """
-    return text.lower().strip()  # Add further preprocessing as necessary
+    return text.lower().strip() 
 
 def home(request):
     """

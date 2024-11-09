@@ -6,7 +6,7 @@ from nltk.stem import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 import string
 
-# Download NLTK data (run only once if needed)
+# Download NLTK data 
 nltk.download('punkt')  # For tokenization
 nltk.download('stopwords')  # For stopwords
 nltk.download('wordnet')  # For lemmatization
@@ -18,8 +18,8 @@ stop_words = set(stopwords.words('english'))
 
 # Function to clean the text
 def preprocess_text(text):
-    text = str(text).lower()  # Convert to lowercase and ensure it's a string
-    text = text.translate(str.maketrans('', '', string.punctuation))  # Remove punctuation
+    text = str(text).lower()  
+    text = text.translate(str.maketrans('', '', string.punctuation))
     tokens = word_tokenize(text)  # Tokenize text
     tokens = [word for word in tokens if word not in stop_words]  # Remove stopwords
     lemmatized_tokens = [lemmatizer.lemmatize(word) for word in tokens]  # Lemmatize tokens

@@ -1,4 +1,3 @@
-# feature_extraction.py
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 
@@ -10,18 +9,17 @@ def load_data(file_path):
 def extract_features_tfidf(df):
     """Extract features using TF-IDF."""
     vectorizer = TfidfVectorizer(stop_words='english')
-    X_tfidf = vectorizer.fit_transform(df['Text'])  # Ensure 'Text' is the correct column name
+    X_tfidf = vectorizer.fit_transform(df['Text'])
     return X_tfidf, vectorizer
 
 def extract_features_bow(df):
     """Extract features using Bag of Words."""
     vectorizer = CountVectorizer(stop_words='english')
-    X_bow = vectorizer.fit_transform(df['Text'])  # Ensure 'Text' is the correct column name
+    X_bow = vectorizer.fit_transform(df['Text'])
     return X_bow, vectorizer
 
 def main():
-    # Path to your dataset
-    file_path = 'dataset/amazon.csv'  # Update this path if necessary
+    file_path = 'dataset/amazon.csv'
     
     # Load data
     df = load_data(file_path)
